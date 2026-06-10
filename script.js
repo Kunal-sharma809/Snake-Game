@@ -10,9 +10,8 @@ let snakeDir = {x: 0, y: 0};
 let snakeArr = [{x: 4, y: 9}];
 let food = {x: 14, y: 9};
 let lastPaintTime = 0;
-let speed = 10;
+let speed = 5;
 let score = 0;
-let highScoreVal = 0;
 
 
 // Game Functions
@@ -55,6 +54,7 @@ const gameEngine = () => {
         snakeArr = [{x: 4, y: 9}];
         // gameSound.play();
         score = 0;
+        speed = 2;
     }
 
 
@@ -76,10 +76,11 @@ const gameEngine = () => {
         foodSound.play();
         snakeArr.unshift({x: snakeArr[0].x + snakeDir.x, y: snakeArr[0].y + snakeDir.y});
         score++;
+        speed += 0.2;
         scoreBox.innerHTML = `Score : ${score}`;
-        if(score > highScoreVal) {
+        if(score > hiScoreVal) {
             hiScoreVal = score;
-            hiScoreBox.innerHTML = `HiScore: ${highScoreVal}`;
+            hiScoreBox.innerHTML = `HiScore: ${hiScoreVal}`;
             localStorage.setItem("hiScore", JSON.stringify(hiScoreVal));
         }
         let a = 2;
@@ -135,22 +136,18 @@ window.addEventListener('keydown', (e) => {
         case "ArrowUp":
             snakeDir.x = 0;
             snakeDir.y = -1;
-            console.log("ArrowUp");
             break;
         case "ArrowDown":
             snakeDir.x = 0;
             snakeDir.y = 1;
-            console.log("ArrowDown");
             break;
         case "ArrowRight":
             snakeDir.x = 1;
             snakeDir.y = 0;
-            console.log("ArrowRight");
             break;
         case "ArrowLeft":
             snakeDir.x = -1;
             snakeDir.y = 0;
-            console.log("ArrowRight");
             break;
         default :
             break;
